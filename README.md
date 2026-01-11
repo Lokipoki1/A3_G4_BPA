@@ -14,7 +14,7 @@ To set up this project, please follow these steps for the model and forms:
    - Download the form files.
    - Deploy the forms in camunda modeler.
 
-3. **UIPAth Model Deployment**
+3. **UIPath Model Deployment**
    - Navigate to the **`UIPath/`** directory.
    - Download the files
    - Put all the files in target folder of your choice
@@ -37,7 +37,7 @@ When starting a new Camunda8 process instance, please include the following para
 }
 ```
 
-**UIPAth**
+**UIPath**
 
 For the initialization of the UIPath process, please set up the variables to the define paths:
 
