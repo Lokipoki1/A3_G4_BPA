@@ -41,8 +41,11 @@ When starting a new Camunda8 process instance, please include the following para
 
 For the initialization of the UIPath process, please set up the variables to the define paths:
 
+```
 homePath: Folder cointaining the Contract Folders and where the folder for each applicant will be created.
+
 downloadPath: Default folder to which your browser downloads files.
+```
 
 These variables are defined on the scope of the first open application element.
 
