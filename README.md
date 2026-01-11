@@ -1,6 +1,6 @@
 # A3_G4_BPA
 
-## 📦 Camunda8 Deployment Instructions
+## 📦 Deployment Instructions
 
 To set up this project, please follow these steps for the model and forms:
 
