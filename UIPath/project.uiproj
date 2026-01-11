@@ -1,0 +1,6 @@
+{
+  "Name": "A3_G4_BPA",
+  "ProjectType": "Process",
+  "Description": "Contract Selection",
+  "MainFile": "Main.xaml"
+}

@@ -1,0 +1,49 @@
+{
+  "components": [
+    {
+      "text": "# Select Contract Type",
+      "type": "text",
+      "layout": {
+        "row": "Row_1f0f4ve",
+        "columns": null
+      },
+      "id": "Field_0fcxypu"
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1rg2hs7",
+        "columns": null
+      },
+      "id": "Field_1ec76qx"
+    },
+    {
+      "text": "= \"Please attach the legal files for candidate \" + nameApplicant + \" \" + surnameApplicant + \" for salary band \"+salaryBand + \".\"",
+      "type": "text",
+      "layout": {
+        "row": "Row_0fxb2kz",
+        "columns": null
+      },
+      "id": "Field_1ycpvh6"
+    },
+    {
+      "label": "File picker",
+      "type": "filepicker",
+      "layout": {
+        "row": "Row_0nb4g1t",
+        "columns": null
+      },
+      "id": "Field_0ho2xwp",
+      "key": "contract"
+    }
+  ],
+  "type": "default",
+  "id": "documentSelection",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.41.0"
+  },
+  "schemaVersion": 19
+}

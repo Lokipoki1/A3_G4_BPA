@@ -1,0 +1,91 @@
+{
+  "components": [
+    {
+      "text": "# Offer for new hire",
+      "type": "text",
+      "layout": {
+        "row": "Row_0leusjl",
+        "columns": 14
+      },
+      "id": "Field_1xst8j8"
+    },
+    {
+      "text": "# ",
+      "type": "text",
+      "layout": {
+        "row": "Row_0leusjl",
+        "columns": null
+      },
+      "id": "Field_078gzz8"
+    },
+    {
+      "text": "### Firma GmbH would like to extend an offer to the candidate:",
+      "type": "text",
+      "layout": {
+        "row": "Row_0jt5g74",
+        "columns": 13
+      },
+      "id": "Field_1thxmm4"
+    },
+    {
+      "text": "=\"Name: \" + nameApplicant",
+      "type": "text",
+      "layout": {
+        "row": "Row_0h7o937",
+        "columns": null
+      },
+      "id": "Field_1pw8wiu"
+    },
+    {
+      "text": "=\"Surname: \" + surnameApplicant",
+      "type": "text",
+      "layout": {
+        "row": "Row_1m9crgl",
+        "columns": null
+      },
+      "id": "Field_0yztijp"
+    },
+    {
+      "text": "=\"Date of birth: \" + birthApplicant",
+      "type": "text",
+      "layout": {
+        "row": "Row_0iqtqxv",
+        "columns": null
+      },
+      "id": "Field_0tbzudp"
+    },
+    {
+      "label": "Salary band",
+      "values": [
+        {
+          "label": "Junior (L1)",
+          "value": "40 000 EUR/ann"
+        },
+        {
+          "label": "Mid-level (L2)",
+          "value": "55 000 EUR/ann"
+        },
+        {
+          "label": "Senior (L3)",
+          "value": "70 000 EUR/ann"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_1yxdy4z",
+        "columns": null
+      },
+      "id": "Field_1aspisz",
+      "key": "salaryBand"
+    }
+  ],
+  "type": "default",
+  "id": "offerPrep",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.41.0"
+  },
+  "schemaVersion": 19
+}

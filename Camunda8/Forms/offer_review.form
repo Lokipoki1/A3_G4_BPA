@@ -1,0 +1,64 @@
+{
+  "components": [
+    {
+      "text": "# Offer review",
+      "type": "text",
+      "layout": {
+        "row": "Row_12rs3fl",
+        "columns": null
+      },
+      "id": "Field_1lw4e0t"
+    },
+    {
+      "text": "=\"Do you approve offer of \" + salaryBand + \" for candidate \" + nameApplicant + \" \" + surnameApplicant + \".\"",
+      "type": "text",
+      "layout": {
+        "row": "Row_1bx3ear",
+        "columns": null
+      },
+      "id": "Field_0lsgxqa"
+    },
+    {
+      "label": "Radio group",
+      "values": [
+        {
+          "label": "Confirm offer",
+          "value": "true"
+        },
+        {
+          "label": "Reject offer",
+          "value": "false"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1mapkwy",
+        "columns": null
+      },
+      "id": "Field_0ojjju0",
+      "key": "approved",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Submit decision",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1quor4n",
+        "columns": null
+      },
+      "id": "Field_1ecghjo"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0lqd1s8",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.41.0"
+  },
+  "schemaVersion": 19
+}

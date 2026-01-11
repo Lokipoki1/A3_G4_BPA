@@ -1,0 +1,106 @@
+{
+  "components": [
+    {
+      "text": "# Processing hiring documents",
+      "type": "text",
+      "layout": {
+        "row": "Row_1233xjm",
+        "columns": null
+      },
+      "id": "Field_1uw7414"
+    },
+    {
+      "text": "Please complete the following manual checks on the candidate's hiring documents before continuing",
+      "type": "text",
+      "layout": {
+        "row": "Row_0fcmtdn",
+        "columns": null
+      },
+      "id": "Field_0e1by4z"
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_06njx73",
+        "columns": null
+      },
+      "id": "Field_0ht21nn"
+    },
+    {
+      "label": "Document preview",
+      "type": "documentPreview",
+      "layout": {
+        "row": "Row_1rlczzb",
+        "columns": null
+      },
+      "id": "Field_16zw8mf",
+      "dataSource": "=[\n  {\n    \"documentId\": Documents.documentId,\n    \"contentHash\": Documents.contentHash,\n    \"metadata\": {\n      \"fileName\": Documents.metadata.fileName,\n      \"contentType\": Documents.metadata.contentType\n    }\n  }\n]"
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1n2tlwj",
+        "columns": null
+      },
+      "id": "Field_0j0nj6s"
+    },
+    {
+      "label": "All required hiring documents have been received (contract, ID, tax forms, bank details, etc.)",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_02x7s3g",
+        "columns": null
+      },
+      "id": "Field_1j3xp0z",
+      "key": "docsReceived",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "All documents are readable and complete (no missing pages, correct scans/photos)",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_0s9y6zj",
+        "columns": null
+      },
+      "id": "Field_1j9y81v",
+      "key": "docsReadable",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "All documents have been saved in the correct HR system / folder with the proper naming",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1lbalqt",
+        "columns": null
+      },
+      "id": "Field_0luqcof",
+      "key": "docsSaved",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "All checks complete",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_0oomplk",
+        "columns": null
+      },
+      "id": "Field_0kxxa1s"
+    }
+  ],
+  "type": "default",
+  "id": "processHirnigDocs",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.41.0"
+  },
+  "schemaVersion": 19
+}

@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0t64ac4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.41.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:collaboration id="Collaboration_04agpt2">
+    <bpmn:participant id="Participant_1d49suy" name="Company" processRef="Process_128lpy1" />
+    <bpmn:participant id="Participant_0kdduud" name="Applicant" />
+    <bpmn:messageFlow id="Flow_0jby5h4" sourceRef="contractSend" targetRef="Participant_0kdduud" />
+    <bpmn:messageFlow id="Flow_0gkqmhi" sourceRef="reqHiringDocs" targetRef="Participant_0kdduud" />
+    <bpmn:messageFlow id="Flow_163to57" sourceRef="Participant_0kdduud" targetRef="receiveCont" />
+    <bpmn:messageFlow id="Flow_0hfjee2" sourceRef="Participant_0kdduud" targetRef="receiveHiringDocs" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_128lpy1" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_13wu8cy">
+      <bpmn:lane id="Lane_0rq389c" name="HR Head">
+        <bpmn:flowNodeRef>Gateway_13wig6k</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1woxxmg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_05p6e8m</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0udl699" name="Recruiter">
+        <bpmn:flowNodeRef>Event_161b6b5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_08orixz</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0ogtito</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_1pqfpms</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>offerPrep</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>reqHiringDocs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1lz7ort</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>contractSend</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1rb5agu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1mr1hus</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>receiveCont</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>receiveHiringDocs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1t3pm06</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:endEvent id="Event_161b6b5" name="Applicant Hired">
+      <bpmn:incoming>Flow_11h4t5a</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_13wig6k" name="Approve offer?">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_02nhjl2</bpmn:incoming>
+      <bpmn:outgoing>Flow_18a3ib7</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1x53etr</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:dataObject id="DataObject_0ibq56d" />
+    <bpmn:dataStoreReference id="DataStoreReference_1x86bx6" name="Employee Registry" />
+    <bpmn:dataObjectReference id="DataObjectReference_0yzeot4" name="Employment contract" dataObjectRef="DataObject_0ibq56d" />
+    <bpmn:sequenceFlow id="Flow_02nhjl2" sourceRef="Activity_05p6e8m" targetRef="Gateway_13wig6k" />
+    <bpmn:sequenceFlow id="Flow_04bed1o" sourceRef="receiveCont" targetRef="Activity_1mr1hus" />
+    <bpmn:sequenceFlow id="Flow_0931kav" sourceRef="StartEvent_1" targetRef="Gateway_08orixz" />
+    <bpmn:sequenceFlow id="Flow_0catnxw" sourceRef="Event_1lz7ort" targetRef="contractSend" />
+    <bpmn:sequenceFlow id="Flow_0o8mpy0" sourceRef="reqHiringDocs" targetRef="receiveHiringDocs" />
+    <bpmn:sequenceFlow id="Flow_1183dl7" sourceRef="Gateway_08orixz" targetRef="offerPrep" />
+    <bpmn:sequenceFlow id="Flow_11h4t5a" sourceRef="Activity_1t3pm06" targetRef="Event_161b6b5" />
+    <bpmn:sequenceFlow id="Flow_12yqxnt" sourceRef="Gateway_0ogtito" targetRef="Activity_1t3pm06" />
+    <bpmn:sequenceFlow id="Flow_1aizfeg" sourceRef="Gateway_1pqfpms" targetRef="reqHiringDocs" />
+    <bpmn:sequenceFlow id="Flow_1axxhnm" sourceRef="offerPrep" targetRef="Activity_05p6e8m" />
+    <bpmn:sequenceFlow id="Flow_1f66qcy" sourceRef="Activity_1rb5agu" targetRef="Gateway_0ogtito" />
+    <bpmn:sequenceFlow id="Flow_1g1nhfc" sourceRef="Event_1woxxmg" targetRef="Gateway_08orixz" />
+    <bpmn:sequenceFlow id="Flow_1j05afo" sourceRef="contractSend" targetRef="receiveCont" />
+    <bpmn:sequenceFlow id="Flow_1t8mkug" sourceRef="Activity_1mr1hus" targetRef="Gateway_0ogtito" />
+    <bpmn:sequenceFlow id="Flow_1xkkh47" sourceRef="Gateway_1pqfpms" targetRef="Event_1lz7ort" />
+    <bpmn:sequenceFlow id="Flow_1ydgrdy" sourceRef="receiveHiringDocs" targetRef="Activity_1rb5agu" />
+    <bpmn:exclusiveGateway id="Gateway_08orixz">
+      <bpmn:incoming>Flow_0931kav</bpmn:incoming>
+      <bpmn:incoming>Flow_1g1nhfc</bpmn:incoming>
+      <bpmn:outgoing>Flow_1183dl7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="Gateway_0ogtito">
+      <bpmn:incoming>Flow_1t8mkug</bpmn:incoming>
+      <bpmn:incoming>Flow_1f66qcy</bpmn:incoming>
+      <bpmn:outgoing>Flow_12yqxnt</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:parallelGateway id="Gateway_1pqfpms">
+      <bpmn:incoming>Flow_18a3ib7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xkkh47</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1aizfeg</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_1x53etr" name="No" sourceRef="Gateway_13wig6k" targetRef="Event_1woxxmg">
+      <bpmn:extensionElements />
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approved="false"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="offerPrep" name="Prepare offer">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="offerPrep" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1183dl7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1axxhnm</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1hq1jfh">
+        <bpmn:targetRef>DataObjectReference_0yzeot4</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1rb5agu" name="Process hiring documents">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="processHirnigDocs" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=hiringDocs.attachments[1]" target="Documents" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ydgrdy</bpmn:incoming>
+      <bpmn:outgoing>Flow_1f66qcy</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:intermediateCatchEvent id="receiveCont" name="Receive Contract" zeebe:modelerTemplate="io.camunda.connectors.inbound.EmailIntermediate.v1" zeebe:modelerTemplateVersion="2" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzkwXzI0MjApIj4KPHBhdGggZD0iTTguMzM4MzUgOS45NTM2NUwxMC4zODk0IDEyLjAxMDRMOC4zMzI2MiAxNC4wNjcyTDkuMTQ2MTYgMTQuODc1TDEyLjAxMDcgMTIuMDEwNEw5LjE0NjE2IDkuMTQ1ODNMOC4zMzgzNSA5Ljk1MzY1WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTEyLjM0ODggOS45NTM2NUwxNC4zOTk4IDEyLjAxMDRMMTIuMzQzIDE0LjA2NzJMMTMuMTU2NiAxNC44NzVMMTYuMDIxMiAxMi4wMTA0TDEzLjE1NjYgOS4xNDU4M0wxMi4zNDg4IDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMy45NzIgMTEuNDM3NUgxLjEyNTMzVjIuNzkyMTlMNy42NzM3NiA3LjMyMzk2QzcuNzY5NjcgNy4zOTA0OSA3Ljg4MzYgNy40MjYxNCA4LjAwMDMyIDcuNDI2MTRDOC4xMTcwNSA3LjQyNjE0IDguMjMwOTggNy4zOTA0OSA4LjMyNjg5IDcuMzIzOTZMMTQuODc1MyAyLjc5MjE5VjhIMTYuMDIxMlYyLjI3MDgzQzE2LjAyMTIgMS45NjY5NCAxNS45MDA0IDEuNjc1NDkgMTUuNjg1NiAxLjQ2MDYxQzE1LjQ3MDcgMS4yNDU3MiAxNS4xNzkyIDEuMTI1IDE0Ljg3NTMgMS4xMjVIMS4xMjUzM0MwLjgyMTQzMiAxLjEyNSAwLjUyOTk4NCAxLjI0NTcyIDAuMzE1MDk5IDEuNDYwNjFDMC4xMDAyMTQgMS42NzU0OSAtMC4wMjA1MDc4IDEuOTY2OTQgLTAuMDIwNTA3OCAyLjI3MDgzVjExLjQzNzVDLTAuMDIwNTA3OCAxMS43NDE0IDAuMTAwMjE0IDEyLjAzMjggMC4zMTUwOTkgMTIuMjQ3N0MwLjUyOTk4NCAxMi40NjI2IDAuODIxNDMyIDEyLjU4MzMgMS4xMjUzMyAxMi41ODMzSDMuOTcyVjExLjQzNzVaTTEzLjYxNDkgMi4yNzA4M0w4LjAwMDMyIDYuMTU1MjFMMi4zODU3NCAyLjI3MDgzSDEzLjYxNDlaIiBmaWxsPSIjRkM1RDBEIi8+CjxwYXRoIGQ9Ik00LjI4MjEgOS45NTM2NUw2LjMzMzE0IDEyLjAxMDRMNC4yNzYzNyAxNC4wNjcyTDUuMDg5OTEgMTQuODc1TDcuOTU0NDkgMTIuMDEwNEw1LjA4OTkxIDkuMTQ1ODNMNC4yODIxIDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzkwXzI0MjAiPgo8cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="inbound.type" value="io.camunda:connector-email-inbound:1" />
+          <zeebe:property name="authentication.type" value="simple" />
+          <zeebe:property name="authentication.username" value="camundag8@gmail.com" />
+          <zeebe:property name="authentication.password" value="mgwm kyff txfn udzb" />
+          <zeebe:property name="data.imapConfig.imapHost" value="imap.gmail.com" />
+          <zeebe:property name="data.imapConfig.imapPort" value="993" />
+          <zeebe:property name="data.imapConfig.imapCryptographicProtocol" value="SSL" />
+          <zeebe:property name="data.folderToListen" value="HIRING" />
+          <zeebe:property name="data.pollingWaitTime" value="PT20S" />
+          <zeebe:property name="data.pollingConfigDiscriminator" value="unseenPollingConfig" />
+          <zeebe:property name="data.pollingConfig.handlingStrategy" value="READ" />
+          <zeebe:property name="activationCondition" value="=contains(subject, &#34;Welcome to the team!&#34;)" />
+          <zeebe:property name="consumeUnmatchedEvents" value="false" />
+          <zeebe:property name="correlationKeyExpression" value="=fromAddress" />
+          <zeebe:property name="deduplicationModeManualFlag" value="false" />
+          <zeebe:property name="deduplicationMode" value="AUTO" />
+          <zeebe:property name="resultVariable" value="signedContract" />
+          <zeebe:property name="resultExpression" value="" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1j05afo</bpmn:incoming>
+      <bpmn:outgoing>Flow_04bed1o</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1gsxx0w" messageRef="Message_178ism3" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="receiveHiringDocs" name="Receive Hiring Documents" zeebe:modelerTemplate="io.camunda.connectors.inbound.EmailIntermediate.v1" zeebe:modelerTemplateVersion="2" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzkwXzI0MjApIj4KPHBhdGggZD0iTTguMzM4MzUgOS45NTM2NUwxMC4zODk0IDEyLjAxMDRMOC4zMzI2MiAxNC4wNjcyTDkuMTQ2MTYgMTQuODc1TDEyLjAxMDcgMTIuMDEwNEw5LjE0NjE2IDkuMTQ1ODNMOC4zMzgzNSA5Ljk1MzY1WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTEyLjM0ODggOS45NTM2NUwxNC4zOTk4IDEyLjAxMDRMMTIuMzQzIDE0LjA2NzJMMTMuMTU2NiAxNC44NzVMMTYuMDIxMiAxMi4wMTA0TDEzLjE1NjYgOS4xNDU4M0wxMi4zNDg4IDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMy45NzIgMTEuNDM3NUgxLjEyNTMzVjIuNzkyMTlMNy42NzM3NiA3LjMyMzk2QzcuNzY5NjcgNy4zOTA0OSA3Ljg4MzYgNy40MjYxNCA4LjAwMDMyIDcuNDI2MTRDOC4xMTcwNSA3LjQyNjE0IDguMjMwOTggNy4zOTA0OSA4LjMyNjg5IDcuMzIzOTZMMTQuODc1MyAyLjc5MjE5VjhIMTYuMDIxMlYyLjI3MDgzQzE2LjAyMTIgMS45NjY5NCAxNS45MDA0IDEuNjc1NDkgMTUuNjg1NiAxLjQ2MDYxQzE1LjQ3MDcgMS4yNDU3MiAxNS4xNzkyIDEuMTI1IDE0Ljg3NTMgMS4xMjVIMS4xMjUzM0MwLjgyMTQzMiAxLjEyNSAwLjUyOTk4NCAxLjI0NTcyIDAuMzE1MDk5IDEuNDYwNjFDMC4xMDAyMTQgMS42NzU0OSAtMC4wMjA1MDc4IDEuOTY2OTQgLTAuMDIwNTA3OCAyLjI3MDgzVjExLjQzNzVDLTAuMDIwNTA3OCAxMS43NDE0IDAuMTAwMjE0IDEyLjAzMjggMC4zMTUwOTkgMTIuMjQ3N0MwLjUyOTk4NCAxMi40NjI2IDAuODIxNDMyIDEyLjU4MzMgMS4xMjUzMyAxMi41ODMzSDMuOTcyVjExLjQzNzVaTTEzLjYxNDkgMi4yNzA4M0w4LjAwMDMyIDYuMTU1MjFMMi4zODU3NCAyLjI3MDgzSDEzLjYxNDlaIiBmaWxsPSIjRkM1RDBEIi8+CjxwYXRoIGQ9Ik00LjI4MjEgOS45NTM2NUw2LjMzMzE0IDEyLjAxMDRMNC4yNzYzNyAxNC4wNjcyTDUuMDg5OTEgMTQuODc1TDcuOTU0NDkgMTIuMDEwNEw1LjA4OTkxIDkuMTQ1ODNMNC4yODIxIDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzkwXzI0MjAiPgo8cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="inbound.type" value="io.camunda:connector-email-inbound:1" />
+          <zeebe:property name="authentication.type" value="simple" />
+          <zeebe:property name="authentication.username" value="camundag8@gmail.com" />
+          <zeebe:property name="authentication.password" value="mgwm kyff txfn udzb" />
+          <zeebe:property name="data.imapConfig.imapHost" value="imap.gmail.com" />
+          <zeebe:property name="data.imapConfig.imapPort" value="993" />
+          <zeebe:property name="data.imapConfig.imapCryptographicProtocol" value="SSL" />
+          <zeebe:property name="data.folderToListen" value="HIRING" />
+          <zeebe:property name="data.pollingWaitTime" value="PT20S" />
+          <zeebe:property name="data.pollingConfigDiscriminator" value="unseenPollingConfig" />
+          <zeebe:property name="data.pollingConfig.handlingStrategy" value="READ" />
+          <zeebe:property name="activationCondition" value="=contains(subject, &#34;[Request] Provide work authorization&#34;)" />
+          <zeebe:property name="consumeUnmatchedEvents" value="false" />
+          <zeebe:property name="correlationKeyExpression" value="=fromAddress" />
+          <zeebe:property name="deduplicationModeManualFlag" value="false" />
+          <zeebe:property name="deduplicationMode" value="AUTO" />
+          <zeebe:property name="resultVariable" value="hiringDocs" />
+          <zeebe:property name="resultExpression" value="" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0o8mpy0</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ydgrdy</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0sy0tna" messageRef="Message_1w45the" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:manualTask id="Activity_1mr1hus" name="Receive signed hard-copy">
+      <bpmn:incoming>Flow_04bed1o</bpmn:incoming>
+      <bpmn:outgoing>Flow_1t8mkug</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:serviceTask id="Activity_1t3pm06" name="Register New Employee" zeebe:modelerTemplate="io.camunda.connectors.csv" zeebe:modelerTemplateVersion="1" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyMSAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wLjUgM0MwLjUgMS44OTU0MyAxLjM5NTQzIDEgMi41IDFIMTguNUMxOS42MDQ2IDEgMjAuNSAxLjg5NTQzIDIwLjUgM1YxOUMyMC41IDIwLjEwNDYgMTkuNjA0NiAyMSAxOC41IDIxSDIuNUMxLjM5NTQzIDIxIDAuNSAyMC4xMDQ2IDAuNSAxOVYzWiIgZmlsbD0iI0ZGQjdDOCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTE2LjA0NzkgMTQuMjY0NEMxNS44Mzg5IDE0LjI2NDQgMTUuNjY4MyAxNC4yMjAzIDE1LjUzNjIgMTQuMTMyM0MxNS40MDk3IDE0LjA0NDMgMTUuMzAyNCAxMy45MDQgMTUuMjE0NCAxMy43MTE0TDEzLjIxNzEgOS4zMDQyNEMxMy4xMjkxIDkuMTExNjcgMTMuMTAxNiA4LjkzODM1IDEzLjEzNDYgOC43ODQzQzEzLjE2NzYgOC42MzAyNCAxMy4yNDQ2IDguNTExOTQgMTMuMzY1NyA4LjQyOTQxQzEzLjQ4NjcgOC4zNDEzOCAxMy42MzggOC4yOTczNiAxMy44MTk2IDguMjk3MzZDMTQuMDQ1MiA4LjI5NzM2IDE0LjIxMyA4LjM0Njg4IDE0LjMyMyA4LjQ0NTkyQzE0LjQzODYgOC41NDQ5NiAxNC41Mzc2IDguNjkwNzYgMTQuNjIwMiA4Ljg4MzMzTDE2LjMwMzggMTIuNzc4OEgxNS44NDE2TDE3LjUyNTIgOC44NzUwOEMxNy42MDc4IDguNjgyNTEgMTcuNzA2OCA4LjUzOTQ1IDE3LjgyMjQgOC40NDU5MkMxNy45Mzc5IDguMzQ2ODggMTguMTAwMiA4LjI5NzM2IDE4LjMwOTMgOC4yOTczNkMxOC40Nzk5IDguMjk3MzYgMTguNjIyOSA4LjM0MTM4IDE4LjczODUgOC40Mjk0MUMxOC44NTQgOC41MTE5NCAxOC45MjU1IDguNjMwMjQgMTguOTUzIDguNzg0M0MxOC45ODYgOC45MzgzNSAxOC45NTg1IDkuMTExNjcgMTguODcwNSA5LjMwNDI0TDE2Ljg2NSAxMy43MTE0QzE2Ljc4MjUgMTMuOTA0IDE2LjY3NzkgMTQuMDQ0MyAxNi41NTE0IDE0LjEzMjNDMTYuNDI0OCAxNC4yMjAzIDE2LjI1NyAxNC4yNjQ0IDE2LjA0NzkgMTQuMjY0NFoiIGZpbGw9ImJsYWNrIi8+CiAgICA8cGF0aCBkPSJNMTAuMjI3MiAxNC4yODA4QzEwLjAwNzEgMTQuMjgwOCA5Ljc3NjA0IDE0LjI2NDMgOS41MzM5NSAxNC4yMzEyQzkuMjk3MzYgMTQuMjAzNyA5LjA3MTc4IDE0LjE1OTcgOC44NTcyIDE0LjA5OTJDOC42NDI2MiAxNC4wMzg3IDguNDUwMDQgMTMuOTY3MSA4LjI3OTQ4IDEzLjg4NDZDOC4xMzA5MiAxMy44MTMxIDguMDI2MzggMTMuNzE5NiA3Ljk2NTg2IDEzLjYwNEM3LjkwNTM0IDEzLjQ4MyA3Ljg4MzMzIDEzLjM1NjQgNy44OTk4NCAxMy4yMjQ0QzcuOTE2MzQgMTMuMDkyMyA3Ljk2MzExIDEyLjk3NjggOC4wNDAxNCAxMi44Nzc3QzguMTE3MTcgMTIuNzczMiA4LjIxODk2IDEyLjcwNDQgOC4zNDU1IDEyLjY3MTRDOC40NzIwNSAxMi42MzI5IDguNjE1MTEgMTIuNjQ5NCA4Ljc3NDY3IDEyLjcyMDlDOC45ODM3NCAxMi44MiA5LjIyMDMzIDEyLjg5NyA5LjQ4NDQzIDEyLjk1MkM5Ljc0ODUzIDEzLjAwNyA5Ljk5NjEyIDEzLjAzNDUgMTAuMjI3MiAxMy4wMzQ1QzEwLjU5MDMgMTMuMDM0NSAxMC44NDM0IDEyLjk4NzggMTAuOTg2NSAxMi44OTQyQzExLjEzNTEgMTIuNzk1MiAxMS4yMDkzIDEyLjY3NDIgMTEuMjA5MyAxMi41MzExQzExLjIwOTMgMTIuNDA0NiAxMS4xNTcxIDEyLjMwMjggMTEuMDUyNSAxMi4yMjU3QzEwLjk1MzUgMTIuMTQ4NyAxMC43NzQ3IDEyLjA4MjcgMTAuNTE2MSAxMi4wMjc3TDkuNTUwNDYgMTEuODIxM0M5LjAyMjI2IDExLjcxMTMgOC42Mjg4NiAxMS41MTg3IDguMzcwMjYgMTEuMjQzNkM4LjExMTY3IDEwLjk2ODUgNy45ODIzNyAxMC42MTM2IDcuOTgyMzcgMTAuMTc5QzcuOTgyMzcgOS44OTI4NyA4LjA0MDE0IDkuNjM0MjcgOC4xNTU2OCA5LjQwMzE4QzguMjc2NzMgOS4xNjY1OSA4LjQ0NDU0IDguOTY1NzcgOC42NTkxMiA4LjgwMDcxQzguODc5MiA4LjYzNTY0IDkuMTM3OCA4LjUwOTEgOS40MzQ5MSA4LjQyMTA2QzkuNzM3NTMgOC4zMjc1MyAxMC4wNzMyIDguMjgwNzYgMTAuNDQxOCA4LjI4MDc2QzEwLjcyNzkgOC4yODA3NiAxMS4wMTY4IDguMzEzNzcgMTEuMzA4NCA4LjM3OThDMTEuNjA1NSA4LjQ0MDMyIDExLjg2MTMgOC41MzM4NiAxMi4wNzU5IDguNjYwNEMxMi4yMDI1IDguNzI2NDMgMTIuMjkzMiA4LjgxNzIxIDEyLjM0ODMgOC45MzI3NkMxMi40MDMzIDkuMDQ4MyAxMi40MjUzIDkuMTY5MzQgMTIuNDE0MyA5LjI5NTg5QzEyLjQwMzMgOS40MTY5NCAxMi4zNTkzIDkuNTI0MjMgMTIuMjgyMiA5LjYxNzc2QzEyLjIxMDcgOS43MTEzIDEyLjExMTcgOS43NzQ1NyAxMS45ODUxIDkuODA3NThDMTEuODY0MSA5LjgzNTA5IDExLjcxODMgOS44MTMwOSAxMS41NDc3IDkuNzQxNTZDMTEuMzg4MSA5LjY3MDAzIDExLjIwNjYgOS42MTc3NiAxMS4wMDMgOS41ODQ3NUMxMC44MDQ5IDkuNTQ2MjQgMTAuNjEyNCA5LjUyNjk4IDEwLjQyNTMgOS41MjY5OEMxMC4yMjE3IDkuNTI2OTggMTAuMDQ4NCA5LjU1MTc0IDkuOTA1MzQgOS42MDEyNkM5Ljc2MjI5IDkuNjQ1MjcgOS42NTIyNCA5LjcxMTMgOS41NzUyMiA5Ljc5OTMzQzkuNTAzNjkgOS44ODczNiA5LjQ2NzkzIDkuOTg5MTUgOS40Njc5MyAxMC4xMDQ3QzkuNDY3OTMgMTAuMjIwMiA5LjUxNDY5IDEwLjMxOTMgOS42MDgyMyAxMC40MDE4QzkuNzA3MjYgMTAuNDc4OCA5Ljg4NjA4IDEwLjU0NDkgMTAuMTQ0NyAxMC41OTk5TDExLjEwMiAxMC44MDYyQzExLjYzNTcgMTAuOTIxOCAxMi4wMzQ2IDExLjExMTYgMTIuMjk4NyAxMS4zNzU3QzEyLjU2MjggMTEuNjM5OCAxMi42OTQ5IDExLjk4MzcgMTIuNjk0OSAxMi40MDczQzEyLjY5NDkgMTIuNjkzNCAxMi42MzcxIDEyLjk1MiAxMi41MjE2IDEzLjE4MzFDMTIuNDA2IDEzLjQxNDIgMTIuMjQxIDEzLjYxMjMgMTIuMDI2NCAxMy43NzczQzExLjgxMTggMTMuOTM2OSAxMS41NTMyIDE0LjA2MDcgMTEuMjUwNiAxNC4xNDg3QzEwLjk0OCAxNC4yMzY3IDEwLjYwNjkgMTQuMjgwOCAxMC4yMjcyIDE0LjI4MDhaIiBmaWxsPSJibGFjayIvPgogICAgPHBhdGggZD0iTTUuMjg3ODMgMTQuMjgwOEM0LjY0NDA5IDE0LjI4MDggNC4wOTExMyAxNC4xNTcgMy42Mjg5NiAxMy45MDk0QzMuMTY2NzggMTMuNjYxOCAyLjgxMTkgMTMuMzEyNCAyLjU2NDMxIDEyLjg2MTJDMi4zMjIyMiAxMi40MTAxIDIuMjAxMTcgMTEuODgxOSAyLjIwMTE3IDExLjI3NjZDMi4yMDExNyAxMC44MjU1IDIuMjY5OTUgMTAuNDE1NiAyLjQwNzUgMTAuMDQ2OUMyLjU1MDU1IDkuNjc4MjkgMi43NTQxMyA5LjM2MTkyIDMuMDE4MjMgOS4wOTc4MkMzLjI4NzgzIDguODMzNzIgMy42MTI0NSA4LjYzMjg5IDMuOTkyMDkgOC40OTUzNEM0LjM3NzI0IDguMzUyMjkgNC44MDkxNSA4LjI4MDc2IDUuMjg3ODMgOC4yODA3NkM1LjU0MDkyIDguMjgwNzYgNS44MDIyNyA4LjMxMTAyIDYuMDcxODcgOC4zNzE1NUM2LjM0Njk4IDguNDI2NTcgNi41ODkwNyA4LjUxMTg1IDYuNzk4MTUgOC42MjczOUM2Ljk1MjIgOC43MDk5MiA3LjA1OTQ5IDguODE0NDYgNy4xMjAwMiA4Ljk0MTAxQzcuMTgwNTQgOS4wNjc1NiA3LjE5OTggOS4xOTY4NiA3LjE3Nzc5IDkuMzI4OUM3LjE2MTI4IDkuNDYwOTUgNy4xMTQ1MSA5LjU3OTI1IDcuMDM3NDkgOS42ODM3OUM2Ljk2MDQ2IDkuNzg4MzMgNi44NjE0MiA5Ljg1OTg1IDYuNzQwMzcgOS44OTgzN0M2LjYxOTMzIDkuOTMxMzggNi40ODcyOCA5LjkxMjEyIDYuMzQ0MjMgOS44NDA2QzYuMTc5MTYgOS43NjM1NyA2LjAxNDEgOS43MDU4IDUuODQ5MDQgOS42NjcyOEM1LjY4OTQ4IDkuNjIzMjcgNS41MjE2NyA5LjYwMTI2IDUuMzQ1NiA5LjYwMTI2QzUuMDA0NDcgOS42MDEyNiA0LjcxODM3IDkuNjY3MjggNC40ODcyOCA5Ljc5OTMzQzQuMjYxNjkgOS45MjU4OCA0LjA5MTEzIDEwLjExMjkgMy45NzU1OSAxMC4zNjA1QzMuODYwMDQgMTAuNjA4MSAzLjgwMjI3IDEwLjkxMzUgMy44MDIyNyAxMS4yNzY2QzMuODAyMjcgMTEuNjM5OCAzLjg2MDA0IDExLjk0NzkgMy45NzU1OSAxMi4yMDFDNC4wOTExMyAxMi40NDg2IDQuMjYxNjkgMTIuNjM4NCA0LjQ4NzI4IDEyLjc3MDRDNC43MTgzNyAxMi44OTcgNS4wMDQ0NyAxMi45NjAzIDUuMzQ1NiAxMi45NjAzQzUuNDg4NjUgMTIuOTYwMyA1LjY0MjcxIDEyLjk0MzggNS44MDc3NyAxMi45MTA3QzUuOTcyODQgMTIuODcyMiA2LjEzNTE1IDEyLjgxNDUgNi4yOTQ3MSAxMi43Mzc0QzYuNDU5NzcgMTIuNjY1OSA2LjYwNTU3IDEyLjY0NjYgNi43MzIxMiAxMi42Nzk3QzYuODY0MTcgMTIuNzEyNyA2Ljk2ODcxIDEyLjc3ODcgNy4wNDU3NCAxMi44Nzc3QzcuMTI4MjcgMTIuOTc2OCA3LjE4MDU0IDEzLjA5MjMgNy4yMDI1NSAxMy4yMjQ0QzcuMjI0NTYgMTMuMzUwOSA3LjIwNTMgMTMuNDc3NSA3LjE0NDc4IDEzLjYwNEM3LjA4OTc2IDEzLjczMDYgNi45OTA3MiAxMy44MzIzIDYuODQ3NjYgMTMuOTA5NEM2LjY1NTA5IDE0LjAyNDkgNi40MTU3NSAxNC4xMTU3IDYuMTI5NjUgMTQuMTgxN0M1Ljg0OTA0IDE0LjI0NzcgNS41Njg0MyAxNC4yODA4IDUuMjg3ODMgMTQuMjgwOFoiIGZpbGw9ImJsYWNrIi8+Cjwvc3ZnPgo=">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:csv-connector" retries="3" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="operation" value="writeCsv" />
+          <zeebe:header key="elementTemplateVersion" value="1" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.csv" />
+          <zeebe:header key="resultVariable" value="dbInsert" />
+          <zeebe:header key="resultExpression" />
+          <zeebe:header key="errorExpression" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+        <zeebe:ioMapping>
+          <zeebe:input source="=[&#10;  {&#10;    &#34;Name&#34;: nameApplicant,&#10;    &#34;Surname&#34;: surnameApplicant,&#10;    &#34;Birthdate&#34;: birthApplicant,&#10;    &#34;Company E-Mail&#34;: lower case(replace(nameApplicant, &#34; &#34;, &#34;-&#34;)) + &#34;.&#34; + lower case(replace(surnameApplicant, &#34; &#34;, &#34;-&#34;))+ &#34;@camundag8.com&#34;,&#10;    &#34;Salary&#34;: salaryBand&#10;  }&#10;]&#10;" target="data" />
+          <zeebe:input source="=true" target="createDocument" />
+          <zeebe:input source="," target="format.delimiter" />
+          <zeebe:input source="=true" target="format.skipHeaderRecord" />
+          <zeebe:input source="=[&#34;Name&#34;, &#34;Surname&#34;, &#34;Birthdate&#34;, &#34;Company E-Mail&#34;, &#34;Salary&#34;]" target="format.headers" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12yqxnt</bpmn:incoming>
+      <bpmn:outgoing>Flow_11h4t5a</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1bigqv0">
+        <bpmn:targetRef>DataStoreReference_1x86bx6</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="reqHiringDocs" name="Request Hiring Documents" zeebe:modelerTemplate="io.camunda.connectors.email.v1" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzkwXzI0MjApIj4KPHBhdGggZD0iTTguMzM4MzUgOS45NTM2NUwxMC4zODk0IDEyLjAxMDRMOC4zMzI2MiAxNC4wNjcyTDkuMTQ2MTYgMTQuODc1TDEyLjAxMDcgMTIuMDEwNEw5LjE0NjE2IDkuMTQ1ODNMOC4zMzgzNSA5Ljk1MzY1WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTEyLjM0ODggOS45NTM2NUwxNC4zOTk4IDEyLjAxMDRMMTIuMzQzIDE0LjA2NzJMMTMuMTU2NiAxNC44NzVMMTYuMDIxMiAxMi4wMTA0TDEzLjE1NjYgOS4xNDU4M0wxMi4zNDg4IDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMy45NzIgMTEuNDM3NUgxLjEyNTMzVjIuNzkyMTlMNy42NzM3NiA3LjMyMzk2QzcuNzY5NjcgNy4zOTA0OSA3Ljg4MzYgNy40MjYxNCA4LjAwMDMyIDcuNDI2MTRDOC4xMTcwNSA3LjQyNjE0IDguMjMwOTggNy4zOTA0OSA4LjMyNjg5IDcuMzIzOTZMMTQuODc1MyAyLjc5MjE5VjhIMTYuMDIxMlYyLjI3MDgzQzE2LjAyMTIgMS45NjY5NCAxNS45MDA0IDEuNjc1NDkgMTUuNjg1NiAxLjQ2MDYxQzE1LjQ3MDcgMS4yNDU3MiAxNS4xNzkyIDEuMTI1IDE0Ljg3NTMgMS4xMjVIMS4xMjUzM0MwLjgyMTQzMiAxLjEyNSAwLjUyOTk4NCAxLjI0NTcyIDAuMzE1MDk5IDEuNDYwNjFDMC4xMDAyMTQgMS42NzU0OSAtMC4wMjA1MDc4IDEuOTY2OTQgLTAuMDIwNTA3OCAyLjI3MDgzVjExLjQzNzVDLTAuMDIwNTA3OCAxMS43NDE0IDAuMTAwMjE0IDEyLjAzMjggMC4zMTUwOTkgMTIuMjQ3N0MwLjUyOTk4NCAxMi40NjI2IDAuODIxNDMyIDEyLjU4MzMgMS4xMjUzMyAxMi41ODMzSDMuOTcyVjExLjQzNzVaTTEzLjYxNDkgMi4yNzA4M0w4LjAwMDMyIDYuMTU1MjFMMi4zODU3NCAyLjI3MDgzSDEzLjYxNDlaIiBmaWxsPSIjRkM1RDBEIi8+CjxwYXRoIGQ9Ik00LjI4MjEgOS45NTM2NUw2LjMzMzE0IDEyLjAxMDRMNC4yNzYzNyAxNC4wNjcyTDUuMDg5OTEgMTQuODc1TDcuOTU0NDkgMTIuMDEwNEw1LjA4OTkxIDkuMTQ1ODNMNC4yODIxIDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzkwXzI0MjAiPgo8cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:email:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="simple" target="authentication.type" />
+          <zeebe:input source="camundag8@gmail.com" target="authentication.username" />
+          <zeebe:input source="mgwm kyff txfn udzb" target="authentication.password" />
+          <zeebe:input source="smtp" target="protocol" />
+          <zeebe:input source="smtp.gmail.com" target="data.smtpConfig.smtpHost" />
+          <zeebe:input source="=587" target="data.smtpConfig.smtpPort" />
+          <zeebe:input source="TLS" target="data.smtpConfig.smtpCryptographicProtocol" />
+          <zeebe:input source="sendEmailSmtp" target="data.smtpActionDiscriminator" />
+          <zeebe:input source="camundag8@gmail.com" target="data.smtpAction.from" />
+          <zeebe:input source="=emailApplicant" target="data.smtpAction.to" />
+          <zeebe:input source="[Request] Provide work authorization" target="data.smtpAction.subject" />
+          <zeebe:input source="PLAIN" target="data.smtpAction.contentType" />
+          <zeebe:input source="=&#34;Hello &#34;+nameApplicant+&#34;,\n\n&#34;+&#34;please send a scan of your work authorization by replying to this email.&#34;&#10;" target="data.smtpAction.body" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="3" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.email.v1" />
+          <zeebe:header key="resultVariable" />
+          <zeebe:header key="resultExpression" />
+          <zeebe:header key="errorExpression" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1aizfeg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0o8mpy0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_05p6e8m" name="Review offer">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="Form_0lqd1s8" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1axxhnm</bpmn:incoming>
+      <bpmn:outgoing>Flow_02nhjl2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="contractSend" name="Send Contract" zeebe:modelerTemplate="io.camunda.connectors.email.v1" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzkwXzI0MjApIj4KPHBhdGggZD0iTTguMzM4MzUgOS45NTM2NUwxMC4zODk0IDEyLjAxMDRMOC4zMzI2MiAxNC4wNjcyTDkuMTQ2MTYgMTQuODc1TDEyLjAxMDcgMTIuMDEwNEw5LjE0NjE2IDkuMTQ1ODNMOC4zMzgzNSA5Ljk1MzY1WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTEyLjM0ODggOS45NTM2NUwxNC4zOTk4IDEyLjAxMDRMMTIuMzQzIDE0LjA2NzJMMTMuMTU2NiAxNC44NzVMMTYuMDIxMiAxMi4wMTA0TDEzLjE1NjYgOS4xNDU4M0wxMi4zNDg4IDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMy45NzIgMTEuNDM3NUgxLjEyNTMzVjIuNzkyMTlMNy42NzM3NiA3LjMyMzk2QzcuNzY5NjcgNy4zOTA0OSA3Ljg4MzYgNy40MjYxNCA4LjAwMDMyIDcuNDI2MTRDOC4xMTcwNSA3LjQyNjE0IDguMjMwOTggNy4zOTA0OSA4LjMyNjg5IDcuMzIzOTZMMTQuODc1MyAyLjc5MjE5VjhIMTYuMDIxMlYyLjI3MDgzQzE2LjAyMTIgMS45NjY5NCAxNS45MDA0IDEuNjc1NDkgMTUuNjg1NiAxLjQ2MDYxQzE1LjQ3MDcgMS4yNDU3MiAxNS4xNzkyIDEuMTI1IDE0Ljg3NTMgMS4xMjVIMS4xMjUzM0MwLjgyMTQzMiAxLjEyNSAwLjUyOTk4NCAxLjI0NTcyIDAuMzE1MDk5IDEuNDYwNjFDMC4xMDAyMTQgMS42NzU0OSAtMC4wMjA1MDc4IDEuOTY2OTQgLTAuMDIwNTA3OCAyLjI3MDgzVjExLjQzNzVDLTAuMDIwNTA3OCAxMS43NDE0IDAuMTAwMjE0IDEyLjAzMjggMC4zMTUwOTkgMTIuMjQ3N0MwLjUyOTk4NCAxMi40NjI2IDAuODIxNDMyIDEyLjU4MzMgMS4xMjUzMyAxMi41ODMzSDMuOTcyVjExLjQzNzVaTTEzLjYxNDkgMi4yNzA4M0w4LjAwMDMyIDYuMTU1MjFMMi4zODU3NCAyLjI3MDgzSDEzLjYxNDlaIiBmaWxsPSIjRkM1RDBEIi8+CjxwYXRoIGQ9Ik00LjI4MjEgOS45NTM2NUw2LjMzMzE0IDEyLjAxMDRMNC4yNzYzNyAxNC4wNjcyTDUuMDg5OTEgMTQuODc1TDcuOTU0NDkgMTIuMDEwNEw1LjA4OTkxIDkuMTQ1ODNMNC4yODIxIDkuOTUzNjVaIiBmaWxsPSJibGFjayIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzkwXzI0MjAiPgo8cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:email:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="simple" target="authentication.type" />
+          <zeebe:input source="camundag8@gmail.com" target="authentication.username" />
+          <zeebe:input source="mgwm kyff txfn udzb" target="authentication.password" />
+          <zeebe:input source="smtp" target="protocol" />
+          <zeebe:input source="smtp.gmail.com" target="data.smtpConfig.smtpHost" />
+          <zeebe:input source="=587" target="data.smtpConfig.smtpPort" />
+          <zeebe:input source="TLS" target="data.smtpConfig.smtpCryptographicProtocol" />
+          <zeebe:input source="sendEmailSmtp" target="data.smtpActionDiscriminator" />
+          <zeebe:input source="camundag8@gmail.com" target="data.smtpAction.from" />
+          <zeebe:input source="=emailApplicant" target="data.smtpAction.to" />
+          <zeebe:input source="Welcome to the team!" target="data.smtpAction.subject" />
+          <zeebe:input source="PLAIN" target="data.smtpAction.contentType" />
+          <zeebe:input source="=&#34;Hello &#34;+nameApplicant+&#34;,\n\n&#34;+&#34;please return a scaned copy of the signed contract latest in 1 week by replying to this email.&#34;&#10;" target="data.smtpAction.body" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="3" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.email.v1" />
+          <zeebe:header key="resultVariable" />
+          <zeebe:header key="resultExpression" />
+          <zeebe:header key="errorExpression" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0catnxw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j05afo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0931kav</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="Event_1woxxmg" name="wait 10 sec">
+      <bpmn:incoming>Flow_1x53etr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1g1nhfc</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1n9t8ox">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Event_1lz7ort" name="wait 10 sec">
+      <bpmn:incoming>Flow_1xkkh47</bpmn:incoming>
+      <bpmn:outgoing>Flow_0catnxw</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0d8z5g1">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_18a3ib7" name="Yes" sourceRef="Gateway_13wig6k" targetRef="Gateway_1pqfpms">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approved="true"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:message id="Message_149ne16" name="Message_149ne16">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=response.body" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_3ge139m" name="Message_3ge139m">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=response.body" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_1w45the" name="ae3363f6-6b80-4d8d-9e91-725ea1f13a1d" zeebe:modelerTemplate="io.camunda.connectors.inbound.EmailIntermediate.v1">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=emailApplicant" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_178ism3" name="385fc31c-e3de-458e-a83f-e099c86c8ec8" zeebe:modelerTemplate="io.camunda.connectors.inbound.EmailIntermediate.v1">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=emailApplicant" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_04agpt2">
+      <bpmndi:BPMNShape id="Participant_1d49suy_di" bpmnElement="Participant_1d49suy" isHorizontal="true">
+        <dc:Bounds x="151" y="203" width="1579" height="717" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0udl699_di" bpmnElement="Lane_0udl699" isHorizontal="true">
+        <dc:Bounds x="181" y="203" width="1549" height="373" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0rq389c_di" bpmnElement="Lane_0rq389c" isHorizontal="true">
+        <dc:Bounds x="181" y="576" width="1549" height="344" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_161b6b5_di" bpmnElement="Event_161b6b5">
+        <dc:Bounds x="1552" y="375" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1534" y="418" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_13wig6k_di" bpmnElement="Gateway_13wig6k" isMarkerVisible="true">
+        <dc:Bounds x="624" y="678" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="693" y="693" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1x86bx6_di" bpmnElement="DataStoreReference_1x86bx6">
+        <dc:Bounds x="1395" y="245" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1396" y="215" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0yzeot4_di" bpmnElement="DataObjectReference_0yzeot4">
+        <dc:Bounds x="506" y="255" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="493" y="225" width="62" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_08orixz_di" bpmnElement="Gateway_08orixz" isMarkerVisible="true">
+        <dc:Bounds x="345" y="398" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0ogtito_di" bpmnElement="Gateway_0ogtito">
+        <dc:Bounds x="1245" y="368" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1pqfpms_di" bpmnElement="Gateway_1pqfpms">
+        <dc:Bounds x="624" y="408" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0cdmxp9" bpmnElement="offerPrep">
+        <dc:Bounds x="474" y="383" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rb5agu_di" bpmnElement="Activity_1rb5agu">
+        <dc:Bounds x="1040" y="440" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0xsrrnq" bpmnElement="receiveCont">
+        <dc:Bounds x="992" y="315" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="968" y="358" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1qtkxm6_di" bpmnElement="receiveHiringDocs">
+        <dc:Bounds x="922" y="462" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="905" y="505" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mr1hus_di" bpmnElement="Activity_1mr1hus">
+        <dc:Bounds x="1110" y="293" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t3pm06_di" bpmnElement="Activity_1t3pm06">
+        <dc:Bounds x="1370" y="353" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1g4w5sh" bpmnElement="reqHiringDocs">
+        <dc:Bounds x="720" y="440" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05p6e8m_di" bpmnElement="Activity_05p6e8m">
+        <dc:Bounds x="474" y="663" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1epoxfm_di" bpmnElement="contractSend">
+        <dc:Bounds x="790" y="293" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="252" y="405" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1woxxmg_di" bpmnElement="Event_1woxxmg">
+        <dc:Bounds x="352" y="612" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="269" y="620" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0vrylen" bpmnElement="Event_1lz7ort">
+        <dc:Bounds x="679" y="315" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="669" y="291" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_02nhjl2_di" bpmnElement="Flow_02nhjl2">
+        <di:waypoint x="574" y="703" />
+        <di:waypoint x="624" y="703" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04bed1o_di" bpmnElement="Flow_04bed1o">
+        <di:waypoint x="1028" y="333" />
+        <di:waypoint x="1110" y="333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0931kav_di" bpmnElement="Flow_0931kav">
+        <di:waypoint x="288" y="423" />
+        <di:waypoint x="345" y="423" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0catnxw_di" bpmnElement="Flow_0catnxw">
+        <di:waypoint x="715" y="333" />
+        <di:waypoint x="790" y="333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0o8mpy0_di" bpmnElement="Flow_0o8mpy0">
+        <di:waypoint x="820" y="480" />
+        <di:waypoint x="922" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1183dl7_di" bpmnElement="Flow_1183dl7">
+        <di:waypoint x="395" y="423" />
+        <di:waypoint x="474" y="423" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11h4t5a_di" bpmnElement="Flow_11h4t5a">
+        <di:waypoint x="1470" y="393" />
+        <di:waypoint x="1552" y="393" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12yqxnt_di" bpmnElement="Flow_12yqxnt">
+        <di:waypoint x="1295" y="393" />
+        <di:waypoint x="1370" y="393" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1aizfeg_di" bpmnElement="Flow_1aizfeg">
+        <di:waypoint x="674" y="433" />
+        <di:waypoint x="697" y="433" />
+        <di:waypoint x="697" y="480" />
+        <di:waypoint x="720" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1axxhnm_di" bpmnElement="Flow_1axxhnm">
+        <di:waypoint x="524" y="463" />
+        <di:waypoint x="524" y="663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1f66qcy_di" bpmnElement="Flow_1f66qcy">
+        <di:waypoint x="1140" y="480" />
+        <di:waypoint x="1270" y="480" />
+        <di:waypoint x="1270" y="418" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1g1nhfc_di" bpmnElement="Flow_1g1nhfc">
+        <di:waypoint x="370" y="612" />
+        <di:waypoint x="370" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j05afo_di" bpmnElement="Flow_1j05afo">
+        <di:waypoint x="890" y="333" />
+        <di:waypoint x="992" y="333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1t8mkug_di" bpmnElement="Flow_1t8mkug">
+        <di:waypoint x="1210" y="333" />
+        <di:waypoint x="1270" y="333" />
+        <di:waypoint x="1270" y="368" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xkkh47_di" bpmnElement="Flow_1xkkh47">
+        <di:waypoint x="649" y="408" />
+        <di:waypoint x="649" y="333" />
+        <di:waypoint x="679" y="333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ydgrdy_di" bpmnElement="Flow_1ydgrdy">
+        <di:waypoint x="958" y="480" />
+        <di:waypoint x="1040" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1x53etr_di" bpmnElement="Flow_1x53etr">
+        <di:waypoint x="649" y="728" />
+        <di:waypoint x="649" y="803" />
+        <di:waypoint x="370" y="803" />
+        <di:waypoint x="370" y="648" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="502" y="785" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18a3ib7_di" bpmnElement="Flow_18a3ib7">
+        <di:waypoint x="649" y="678" />
+        <di:waypoint x="649" y="458" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="655" y="565" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_0kdduud_di" bpmnElement="Participant_0kdduud" isHorizontal="true">
+        <dc:Bounds x="180" y="80" width="1550" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1hq1jfh_di" bpmnElement="DataOutputAssociation_1hq1jfh">
+        <di:waypoint x="525" y="383" />
+        <di:waypoint x="526" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1bigqv0_di" bpmnElement="DataOutputAssociation_1bigqv0">
+        <di:waypoint x="1420" y="353" />
+        <di:waypoint x="1420" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jby5h4_di" bpmnElement="Flow_0jby5h4">
+        <di:waypoint x="840" y="293" />
+        <di:waypoint x="840" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gkqmhi_di" bpmnElement="Flow_0gkqmhi">
+        <di:waypoint x="770" y="440" />
+        <di:waypoint x="770" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_163to57_di" bpmnElement="Flow_163to57">
+        <di:waypoint x="1010" y="140" />
+        <di:waypoint x="1010" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hfjee2_di" bpmnElement="Flow_0hfjee2">
+        <di:waypoint x="940" y="140" />
+        <di:waypoint x="940" y="462" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
