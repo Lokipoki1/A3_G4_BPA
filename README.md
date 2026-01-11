@@ -19,11 +19,13 @@ To set up this project, please follow these steps for the model and forms:
    - Download the files
    - Put all the files in target folder of your choice
    - Open the project.json file in UIPath Studio
+
 ---
 
 ## ⚙️ Configuration Variables
 
 **Camunda 8**
+
 When starting a new Camunda8 process instance, please include the following parameters:
 
 ```json
@@ -43,6 +45,8 @@ homePath: Folder cointaining the Contract Folders and where the folder for each 
 downloadPath: Default folder to which your browser downloads files.
 
 These variables are defined on the scope of the first open application element.
+
+---
 
 ## 🎥 Video
 
